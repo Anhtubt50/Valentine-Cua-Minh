@@ -5,7 +5,6 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Gửi Tuyết Trinh</title>
     <style>
-        /* PHẦN NÀY LÀ ĐỂ TRANG TRÍ - BẠN KHÔNG CẦN CHỈNH SỬA CŨNG ĐƯỢC */
         body, html {
             margin: 0; padding: 0; width: 100%; height: 100%;
             background-color: #ffebee; font-family: Arial, sans-serif;
@@ -21,8 +20,10 @@
         #start-btn {
             padding: 15px 30px; font-size: 18px; background: #ff1744;
             color: white; border: none; border-radius: 25px; cursor: pointer;
+            box-shadow: 0 4px 15px rgba(0,0,0,0.2);
         }
 
+        /* Hiệu ứng ảnh bay */
         .floating-img {
             width: 120px; height: auto; border: 4px solid white;
             position: absolute; z-index: 1; animation: float-around 20s infinite linear;
@@ -37,12 +38,17 @@
             100% { transform: translate(0, 0) rotate(0deg); }
         }
 
-        /* PHONG THƯ TRẮNG */
+        /* Hiệu ứng trái tim bay */
+        .heart-particle {
+            position: absolute; color: #ff1744; pointer-events: none; z-index: 2;
+        }
+
+        /* Phong thư */
         .envelope-container { position: relative; width: 280px; height: 180px; z-index: 10; }
         .envelope {
             width: 100%; height: 100%; background: #ffffff; border: 1px solid #ddd;
             display: flex; justify-content: center; align-items: center;
-            box-shadow: 0 10px 20px rgba(0,0,0,0.1); cursor: pointer;
+            box-shadow: 0 10px 20px rgba(0,0,0,0.1); cursor: pointer; position: relative;
         }
         .envelope::after {
             content: ""; position: absolute; top: 0;
@@ -50,7 +56,7 @@
             border-top: 90px solid #f0f0f0; transform-origin: top; transition: 0.5s; z-index: 2;
         }
 
-        /* BỨC THƯ KHI MỞ RA - ĐÃ TỐI ƯU CHO ĐIỆN THOẠI */
+        /* Bức thư */
         .letter {
             position: fixed; top: 50%; left: 50%; transform: translate(-50%, -50%) scale(0);
             width: 90%; max-width: 450px; background: white; padding: 20px;
@@ -65,10 +71,10 @@
         }
 
         .letter-content { flex: 1; }
-        .letter-content h2 { font-size: 22px; font-weight: bold; margin: 0; color: #333; }
-        .letter-content p { font-size: 15px; color: #555; line-height: 1.4; margin-top: 10px; }
+        .letter-content h2 { font-size: 24px; font-weight: bold; margin: 0; color: #333; }
+        .letter-content p { font-size: 16px; color: #555; line-height: 1.4; margin-top: 10px; }
 
-        /* KHI MÀN HÌNH NHỎ (ĐIỆN THOẠI) */
+        /* Mobile */
         @media (max-width: 480px) {
             .letter { flex-direction: column; text-align: center; }
             .letter-img { width: 50%; margin-right: 0; margin-bottom: 10px; }
@@ -83,7 +89,7 @@
 <body>
 
 <div id="overlay">
-    <button id="start-btn">Bấm để nhận quà từ Anh ❤️</button>
+    <button id="start-btn">Bấm để khám phá món quà của Tuyết Trinh ❤️</button>
 </div>
 
 <audio id="bgMusic" loop>
@@ -118,11 +124,33 @@
     document.getElementById('start-btn').addEventListener('click', () => {
         overlay.style.display = 'none';
         music.play();
+        createHeartFlow(); // Bắt đầu hiệu ứng trái tim
     });
 
     envelope.addEventListener('click', () => {
         envelope.classList.add('open');
     });
+
+    // Hàm tạo trái tim bay
+    function createHeartFlow() {
+        setInterval(() => {
+            const heart = document.createElement('div');
+            heart.innerHTML = '❤️';
+            heart.className = 'heart-particle';
+            heart.style.left = Math.random() * 100 + 'vw';
+            heart.style.top = '105vh';
+            heart.style.fontSize = (Math.random() * 15 + 10) + 'px';
+            
+            const duration = Math.random() * 3 + 4;
+            heart.animate([
+                { transform: `translateY(0) rotate(0deg)`, opacity: 1 },
+                { transform: `translateY(-110vh) rotate(${Math.random() * 360}deg)`, opacity: 0 }
+            ], { duration: duration * 1000, easing: 'linear' });
+
+            document.body.appendChild(heart);
+            setTimeout(() => heart.remove(), duration * 1000);
+        }, 400);
+    }
 </script>
 
 </body>

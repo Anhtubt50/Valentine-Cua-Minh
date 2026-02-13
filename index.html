@@ -23,7 +23,7 @@
             box-shadow: 0 4px 15px rgba(0,0,0,0.2);
         }
 
-        /* Hiệu ứng ảnh bay */
+        
         .floating-img {
             width: 120px; height: auto; border: 4px solid white;
             position: absolute; z-index: 1; animation: float-around 20s infinite linear;
@@ -38,12 +38,12 @@
             100% { transform: translate(0, 0) rotate(0deg); }
         }
 
-        /* Hiệu ứng trái tim bay */
+        
         .heart-particle {
             position: absolute; color: #ff1744; pointer-events: none; z-index: 2;
         }
 
-        /* Phong thư */
+        
         .envelope-container { position: relative; width: 280px; height: 180px; z-index: 10; }
         .envelope {
             width: 100%; height: 100%; background: #ffffff; border: 1px solid #ddd;
@@ -56,7 +56,7 @@
             border-top: 90px solid #f0f0f0; transform-origin: top; transition: 0.5s; z-index: 2;
         }
 
-        /* Bức thư */
+        
         .letter {
             position: fixed; top: 50%; left: 50%; transform: translate(-50%, -50%) scale(0);
             width: 90%; max-width: 450px; background: white; padding: 20px;
@@ -74,7 +74,7 @@
         .letter-content h2 { font-size: 24px; font-weight: bold; margin: 0; color: #333; }
         .letter-content p { font-size: 16px; color: #555; line-height: 1.4; margin-top: 10px; }
 
-        /* Mobile */
+        
         @media (max-width: 480px) {
             .letter { flex-direction: column; text-align: center; }
             .letter-img { width: 50%; margin-right: 0; margin-bottom: 10px; }
@@ -126,14 +126,14 @@ Chúc em một Valentine thật ấm áp và trọn vẹn, Tuyết Trinh nhé! �
     document.getElementById('start-btn').addEventListener('click', () => {
         overlay.style.display = 'none';
         music.play();
-        createHeartFlow(); // Bắt đầu hiệu ứng trái tim
+        createHeartFlow(); 
     });
 
     envelope.addEventListener('click', () => {
         envelope.classList.add('open');
     });
 
-    // Hàm tạo trái tim bay
+    
     function createHeartFlow() {
         setInterval(() => {
             const heart = document.createElement('div');
@@ -158,4 +158,5 @@ Chúc em một Valentine thật ấm áp và trọn vẹn, Tuyết Trinh nhé! �
 </body>
 
 </html>
+
 
